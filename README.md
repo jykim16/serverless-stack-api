@@ -144,3 +144,28 @@ To [override the default config](https://eslint.org/docs/user-guide/configuring)
 
 This repo is maintained by [Anomaly Innovations](https://anoma.ly); makers of [Seed](https://seed.run) and [Serverless Stack](https://serverless-stack.com).
 # serverless-stack-api
+
+```
+Serverless: Stack update finished...
+Service Information
+service: notes-api
+stage: prod
+region: us-east-1
+stack: notes-api-prod
+resources: 30
+api keys:
+  None
+endpoints:
+  GET - https://5mhvxt5c6g.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  GET - https://5mhvxt5c6g.execute-api.us-east-1.amazonaws.com/prod/notes
+  PUT - https://5mhvxt5c6g.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+  DELETE - https://5mhvxt5c6g.execute-api.us-east-1.amazonaws.com/prod/notes/{id}
+functions:
+  create: notes-api-prod-create
+  get: notes-api-prod-get
+  list: notes-api-prod-list
+  update: notes-api-prod-update
+  delete: notes-api-prod-delete
+layers:
+  None
+```
