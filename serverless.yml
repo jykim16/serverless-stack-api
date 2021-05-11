@@ -16,13 +16,13 @@ provider:
   stage: prod
   region: us-east-1
 
-# These environment variables are made available to our functions
-# under process.env.
+  # These environment variables are made available to our functions
+  # under process.env.
   environment:
     tableName: notes
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 
-# 'iamRoleStatements' defines the permission policy for the Lambda function. # In this case Lambda functions are granted with permissions to access
+  # 'iamRoleStatements' defines the permission policy for the Lambda function. # In this case Lambda functions are granted with permissions to access
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -42,6 +42,7 @@ functions:
       - http:
           path: notes
           method: post
+          cors: true
           authorizer: aws_iam
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
@@ -52,6 +53,7 @@ functions:
       - http:
           path: notes/{id}
           method: get
+          cors: true
           authorizer: aws_iam
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
@@ -62,6 +64,7 @@ functions:
       - http:
           path: notes
           method: get
+          cors: true
           authorizer: aws_iam
   update:
     # Defines an HTTP API endpoint that calls the main function in update.js
@@ -72,6 +75,7 @@ functions:
       - http:
           path: notes/{id}
           method: put
+          cors: true
           authorizer: aws_iam
   delete:
     # Defines an HTTP API endpoint that calls the main function in delete.js
@@ -82,13 +86,19 @@ functions:
       - http:
           path: notes/{id}
           method: delete
+          cors: true
           authorizer: aws_iam
   billing:
     # Defines an HTTP API endpoint that calls the main function in billing.js # - path: url path is /billing
     # - method: POST request
     handler: apis/billing.main
     events:
-    - http:
-        path: billing
-        method: post
-        authorizer: aws_iam
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
+
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
